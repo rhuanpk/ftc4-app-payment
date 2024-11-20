@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PedidoPresenter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app-order</a> &gt; <a href="index.source.html" class="el_package">org.example.order.adapters.presenters</a> &gt; <span class="el_source">PedidoPresenter.java</span></div><h1>PedidoPresenter.java</h1><pre class="source lang-java linenums">package org.example.order.adapters.presenters;
+
+import org.example.order.core.domain.Pedido;
+import org.example.order.core.domain.PedidoItem;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+<span class="nc" id="L11">public class PedidoPresenter {</span>
+
+    public static Object toObject(Pedido pedido) {
+<span class="fc" id="L14">        Map&lt;String, Object&gt; presenter = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L15">        presenter.put(&quot;id&quot;, pedido.getId());</span>
+<span class="fc" id="L16">        presenter.put(&quot;valor&quot;, pedido.getValor());</span>
+<span class="fc" id="L17">        presenter.put(&quot;data_criacao&quot;, pedido.getDataCriacao());</span>
+<span class="fc" id="L18">        presenter.put(&quot;status_pedido&quot;, pedido.getStatusPedido());</span>
+<span class="fc" id="L19">        presenter.put(&quot;status_pagamento&quot;, pedido.getStatusPagamento());</span>
+<span class="fc" id="L20">        presenter.put(&quot;nome_cliente&quot;, pedido.getClienteNome());</span>
+<span class="fc" id="L21">        List&lt;Map&lt;String, Object&gt;&gt; produtosPresenter = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for (PedidoItem pedidoItem : pedido.getItems()) {</span>
+<span class="fc" id="L23">            Map&lt;String, Object&gt; produtoPresenter = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L24">            produtoPresenter.put(&quot;quantidade&quot;, pedidoItem.getQuantidade());</span>
+<span class="fc" id="L25">            produtoPresenter.put(&quot;produto_nome&quot;, pedidoItem.getNomeProduto());</span>
+<span class="fc" id="L26">            produtoPresenter.put(&quot;valor&quot;, pedidoItem.getValor());</span>
+<span class="fc" id="L27">            produtosPresenter.add(produtoPresenter);</span>
+<span class="fc" id="L28">        }</span>
+<span class="fc" id="L29">        presenter.put(&quot;itens&quot;, produtosPresenter);</span>
+<span class="fc" id="L30">        return presenter;</span>
+    }
+
+    public static List&lt;Object&gt; toList(List&lt;Pedido&gt; pedidos) {
+<span class="fc" id="L34">        List&lt;Object&gt; presenters = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        for (Pedido pedido : pedidos) {</span>
+<span class="fc" id="L36">            presenters.add(PedidoPresenter.toObject(pedido));</span>
+<span class="fc" id="L37">        }</span>
+<span class="fc" id="L38">        return presenters;</span>
+    }
+
+    public static Object toObjectStatusPedido(Pedido pedido) {
+<span class="fc" id="L42">        Map&lt;String, Object&gt; presenter = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L43">        presenter.put(&quot;id&quot;, pedido.getId());</span>
+<span class="fc" id="L44">        presenter.put(&quot;pagamento_aprovado&quot;, pedido.isPago());</span>
+<span class="fc" id="L45">        return presenter;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

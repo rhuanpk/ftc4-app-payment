@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PedidoController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app-order</a> &gt; <a href="index.source.html" class="el_package">org.example.order.adapters.controllers</a> &gt; <span class="el_source">PedidoController.java</span></div><h1>PedidoController.java</h1><pre class="source lang-java linenums">package org.example.order.adapters.controllers;
+
+import org.example.order.adapters.presenters.PedidoPresenter;
+import org.example.order.core.applications.repositories.PedidoRepositoryInterface;
+import org.example.order.core.applications.usecases.*;
+import org.example.order.core.applications.usecases.criarPedido.CriarPedido;
+import org.example.order.core.applications.usecases.criarPedido.CriarPedidoInput;
+import org.example.order.core.domain.Pedido;
+import org.example.order.core.domain.enums.StatusPagamento;
+import org.example.order.core.domain.enums.StatusPedido;
+
+import java.util.List;
+import java.util.UUID;
+
+public class PedidoController {
+
+    private final PedidoRepositoryInterface pedidoRepository;
+
+<span class="fc" id="L19">    public PedidoController(PedidoRepositoryInterface pedidoRepository) {</span>
+<span class="fc" id="L20">        this.pedidoRepository = pedidoRepository;</span>
+<span class="fc" id="L21">    }</span>
+
+    public List&lt;Object&gt; listar() {
+<span class="fc" id="L24">        GetPedidos getPedidos = new GetPedidos(this.pedidoRepository);</span>
+<span class="fc" id="L25">        List&lt;Pedido&gt; pedidos = getPedidos.execute();</span>
+<span class="fc" id="L26">        return PedidoPresenter.toList(pedidos);</span>
+    }
+
+    public List&lt;Object&gt; listarPorStatus(StatusPedido statusPedido) {
+<span class="fc" id="L30">        GetPedidosByStatus getPedidosByStatus = new GetPedidosByStatus(this.pedidoRepository);</span>
+<span class="fc" id="L31">        List&lt;Pedido&gt; pedidos = getPedidosByStatus.execute(statusPedido);</span>
+<span class="fc" id="L32">        return PedidoPresenter.toList(pedidos);</span>
+    }
+
+    public Object criarPedido(CriarPedidoInput input) {
+<span class="fc" id="L36">        CriarPedido criarPedido = new CriarPedido(this.pedidoRepository);</span>
+<span class="fc" id="L37">        return PedidoPresenter.toObject(criarPedido.execute(input));</span>
+    }
+
+    public Object pagamentoAprovado(UUID id) {
+<span class="fc" id="L41">        GetPedido getPedido = new GetPedido(this.pedidoRepository);</span>
+<span class="fc" id="L42">        return PedidoPresenter.toObjectStatusPedido(getPedido.execute(id));</span>
+    }
+
+    public Object atualizarStatusPedido(UUID id, StatusPedido statusPedido) {
+<span class="fc" id="L46">        AtualizarStatusPedido atualizarStatusPedido = new AtualizarStatusPedido(this.pedidoRepository);</span>
+<span class="fc" id="L47">        return PedidoPresenter.toObject(atualizarStatusPedido.execute(id, statusPedido));</span>
+    }
+
+    public Object atualizarStatusPagamento(UUID id, StatusPagamento statusPagamento) {
+<span class="fc" id="L51">        AtualizarStatusPagamento atualizarStatusPagamento = new AtualizarStatusPagamento(this.pedidoRepository);</span>
+<span class="fc" id="L52">        return PedidoPresenter.toObjectStatusPedido(atualizarStatusPagamento.execute(id, statusPagamento));</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
