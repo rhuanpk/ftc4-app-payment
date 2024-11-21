@@ -9,6 +9,7 @@ import org.example.payment.core.domain.Pedido;
 import org.example.payment.core.domain.enums.StatusPagamento;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class PedidoController {
@@ -19,12 +20,12 @@ public class PedidoController {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public Object criarPedido(CriarPedidoInput input) {
+    public Map<String, Object> criarPedido(CriarPedidoInput input) {
         CriarPedido criarPedido = new CriarPedido(this.pedidoRepository);
         return PedidoPresenter.toObject(criarPedido.execute(input));
     }
 
-    public Object atualizarStatusPagamento(UUID id, StatusPagamento statusPagamento) {
+    public Map<String, Object> atualizarStatusPagamento(UUID id, StatusPagamento statusPagamento) {
         AtualizarStatusPagamento atualizarStatusPagamento = new AtualizarStatusPagamento(this.pedidoRepository);
         return PedidoPresenter.toObject(atualizarStatusPagamento.execute(id, statusPagamento));
     }
