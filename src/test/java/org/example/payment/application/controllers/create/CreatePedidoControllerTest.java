@@ -1,5 +1,6 @@
 package org.example.payment.application.controllers.create;
 
+import org.example.payment.adapters.services.RequestInterface;
 import org.example.payment.core.applications.repositories.PedidoRepositoryInterface;
 import org.example.payment.core.domain.Pedido;
 import org.example.payment.core.domain.enums.StatusPagamento;
@@ -25,12 +26,15 @@ public class CreatePedidoControllerTest {
     @Mock
     private PedidoRepositoryInterface pedidoRepositoryInterface;
 
+    @Mock
+    private RequestInterface requestInterface;
+
     AutoCloseable openMocks;
 
     @BeforeEach
     void setUp() {
         openMocks = org.mockito.MockitoAnnotations.openMocks(this);
-        CreatePedidoController createPedidoController = new CreatePedidoController(this.pedidoRepositoryInterface);
+        CreatePedidoController createPedidoController = new CreatePedidoController(this.pedidoRepositoryInterface, this.requestInterface);
         this.mockMvc = MockMvcBuilders.standaloneSetup(createPedidoController).build();
     }
 
@@ -50,22 +54,13 @@ public class CreatePedidoControllerTest {
         this.mockMvc.perform(
                         post("/pedidos")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content("{\"uuid\": \""+UUID.randomUUID()+"\", \"nomeCliente\": \"Cliente\", \"valor\": \"10.98\"}")
+                                .content("{\"uuid\": \"" + UUID.randomUUID() + "\", \"nomeCliente\": \"Cliente\", \"valor\": \"10.98\"}")
                 )
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").isNotEmpty())
                 .andExpect(jsonPath("$.cliente_nome").value("Cliente"))
                 .andExpect(jsonPath("$.valor").value(10.98))
                 .andExpect(jsonPath("$.pagamento_aprovado").value(false));
-//                .andExpect(jsonPath("$.data_criacao").isNotEmpty())
-//                .andExpect(jsonPath("$.valor").value(60.0))
-//                .andExpect(jsonPath("$.itens").isArray())
-//                .andExpect(jsonPath("$.itens[0].produto_nome").value("Produto"))
-//                .andExpect(jsonPath("$.itens[0].valor").value(10.0))
-//                .andExpect(jsonPath("$.itens[0].quantidade").value(1))
-//                .andExpect(jsonPath("$.itens[1].produto_nome").value("Produto 2"))
-//                .andExpect(jsonPath("$.itens[1].valor").value(25.0))
-//                .andExpect(jsonPath("$.itens[1].quantidade").value(2));
     }
 
 }
