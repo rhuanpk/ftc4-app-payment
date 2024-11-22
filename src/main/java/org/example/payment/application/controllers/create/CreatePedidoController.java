@@ -3,6 +3,7 @@ package org.example.payment.application.controllers.create;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.example.payment.adapters.controllers.PedidoController;
+import org.example.payment.adapters.services.RequestInterface;
 import org.example.payment.application.controllers.create.requests.PedidoCreateRequest;
 import org.example.payment.core.applications.repositories.PedidoRepositoryInterface;
 import org.example.payment.core.applications.usecases.CriarPedidoInput;
@@ -23,6 +24,7 @@ import java.util.Map;
 public class CreatePedidoController {
 
     private final PedidoRepositoryInterface pedidoRepositoryInterace;
+    private final RequestInterface requestService;
 
     @PostMapping
     @Operation(tags = "Pedidos")
@@ -34,10 +36,9 @@ public class CreatePedidoController {
         /**
          * Aqui é para simular a fila, será feito um random para decidir se o pagamento será aprovado ou não
          */
-//        Map<String, Object> response2 = pedidoController.atualizarStatusPagamento(
-//                input.uuid(),
-//                Math.random() > 0.5 ? StatusPagamento.PAGO : StatusPagamento.PAGO
-//        );
+        StatusPagamento statusPagamento = Math.random() > 0.5 ? StatusPagamento.PAGO : StatusPagamento.NEGADO;
+        pedidoController.atualizarStatusPagamento(input.uuid(), statusPagamento);
+
 //        RestTemplate restTemplate = new RestTemplate();
 //        String url = "http://localhost:8080/pagamentos";
 //        HttpHeaders headers = new HttpHeaders();
@@ -47,6 +48,11 @@ public class CreatePedidoController {
 //        jsonBody.put("pagamentoAprovado", response2.get("pagamento_aprovado"));
 //        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(jsonBody, headers);
 //        restTemplate.postForEntity(url, requestEntity, String.class);
+
+        Map<String, Object> jsonBody = new HashMap<>();
+        jsonBody.put("id", response.get("id"));
+        jsonBody.put("pagamentoAprovado", statusPagamento == StatusPagamento.PAGO);
+        requestService.post("pagamentos", jsonBody);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
