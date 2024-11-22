@@ -1,0 +1,16 @@
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/application/controllers/atualizarStatus/AtualizarStatusPagamentoControllerTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/application/controllers/atualizarStatus/AtualizarStatusPedidoControllerTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/application/controllers/create/CreatePedidoControllerTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/application/controllers/listaStatus/ListaPorStatusPedidoControllerTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/application/controllers/listar/ListarPedidoControllerTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/application/controllers/pagamentoAprovado/PagamentoAprovadoPedidoControllerTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/core/entities/PedidoItemTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/core/entities/PedidoTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/core/usecases/AtualizarStatusPagamentoTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/core/usecases/AtualizarStatusPedidoTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/core/usecases/CriarPedidoTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/core/usecases/GetPedidoTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/core/usecases/GetPedidosByStatusTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/core/usecases/GetPedidosTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/gateways/PedidoGatewayTest.java
+/home/bruno/Projetos/projetos/ftc4-app-order/src/test/java/org/example/order/repositories/PedidoRepositoryTest.java
