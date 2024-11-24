@@ -39,16 +39,6 @@ public class CreatePedidoController {
         StatusPagamento statusPagamento = Math.random() > 0.5 ? StatusPagamento.PAGO : StatusPagamento.NEGADO;
         pedidoController.atualizarStatusPagamento(input.uuid(), statusPagamento);
 
-//        RestTemplate restTemplate = new RestTemplate();
-//        String url = "http://localhost:8080/pagamentos";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        Map<String, Object> jsonBody = new HashMap<>();
-//        jsonBody.put("id", response2.get("id"));
-//        jsonBody.put("pagamentoAprovado", response2.get("pagamento_aprovado"));
-//        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(jsonBody, headers);
-//        restTemplate.postForEntity(url, requestEntity, String.class);
-
         Map<String, Object> jsonBody = new HashMap<>();
         jsonBody.put("id", response.get("id"));
         jsonBody.put("pagamentoAprovado", statusPagamento == StatusPagamento.PAGO);

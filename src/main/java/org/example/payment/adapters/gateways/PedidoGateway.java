@@ -5,7 +5,6 @@ import org.example.payment.application.driven.entities.PedidoEntity;
 import org.example.payment.application.driven.repositories.PedidoRepository;
 import org.example.payment.core.applications.repositories.PedidoRepositoryInterface;
 import org.example.payment.core.domain.Pedido;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -16,8 +15,6 @@ import java.util.UUID;
 public class PedidoGateway implements PedidoRepositoryInterface {
 
     private PedidoRepository pedidoRepository;
-
-    private final ModelMapper modelMapper;
 
     @Override
     public Pedido criarPedido(Pedido pedido) {
@@ -30,7 +27,6 @@ public class PedidoGateway implements PedidoRepositoryInterface {
         this.pedidoRepository.save(pedidoEntity);
         return pedido;
     }
-
 
     @Override
     public Pedido getById(UUID id) {
