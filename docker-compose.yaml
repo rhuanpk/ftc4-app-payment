@@ -21,9 +21,7 @@ services:
          context: .
          dockerfile: Dockerfile
       environment:
-         MYSQL_HOST: ${MYSQL_HOST:-db}
-         MYSQL_PORT: ${MYSQL_PORT:-3306}
-         MYSQL_DATABASE: ${MYSQL_DATABASE:-db}
+         MYSQL_URI: ${MYSQL_URI:-db}
          MYSQL_USER: ${MYSQL_USER:-user}
          MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}
          URL_API_ORDER: ${URL_API_ORDER:-http://localhost:8080/}
